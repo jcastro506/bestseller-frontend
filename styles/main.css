@@ -1,28 +1,120 @@
 body {
-    margin: 0;
-    padding: 0;
-    display: grid;
+    /* display: grid;
     grid-template-areas: 
       "header header"
-      "nav main";
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: 80px 1fr;
-    row-gap: 10px;
-    column-gap: 15px;
+      "main main";
+    grid-template-columns: 100px 1fr; 
+    grid-template-rows: 100px 1fr;
+    row-gap: 50px;
+    column-gap: 15px; 
+    background-image: url("images/bestseller-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; */
+    font-family: 'Courier New', Courier, monospace;
   }
   
   header {
     grid-area: header;
-    border: 2px solid red;
+    margin: 0px 60px;
+    color: rgb(0, 0, 0);
+    font-size: 2em; 
   }
-  
+
+
   main {
-    grid-area: main;
-    border: 2px solid blue;
+    /* grid-area: main; */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 0px 60px;
+    background-color: rgb(235, 235, 235);
+  }
+
+  .tile {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    float: left
   }
   
-  nav {
+  /* .tile:hover {
+    border: 3px solid rgb(252, 252, 252); 
+    background-color: rgba(255, 255, 255, 0.3);
+  } */
+
+  /* .book-img {
+    width: 230px;
+    height: 250px;
+  } */
+
+  .tile{
+    margin: 10px 60px;
+    width: 300px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* nav {
     grid-area: nav;
-    border: 2px solid green;
+    background-color: rgb(235, 235, 235);
+  } */
+
+  
+
+  /*  BLINKING CURSOR */
+  .blinking-cursor {
+    font-weight: 100;
+    font-size: 60px;
+    color: #2E3D48;
+    -webkit-animation: 1s blink step-end infinite;
+    -moz-animation: 1s blink step-end infinite;
+    -ms-animation: 1s blink step-end infinite;
+    -o-animation: 1s blink step-end infinite;
+    animation: 1s blink step-end infinite;
   }
   
+  @keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+  }
+  
+  @-moz-keyframes blink {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+  }
+  
+  @-webkit-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+  }
+  
+  @-ms-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+  }
+  
+  @-o-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+  }
