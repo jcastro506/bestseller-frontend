@@ -6,27 +6,35 @@
     <link rel="stylesheet" href="styles/main.css">
     <script src="./src/index.js" defer></script>
 
-    <title>bestseller</title>
+    <title>📚 bestseller</title>
 </head>
 <body>
     <header>
       <!-- <img id="books" src="https://i.imgur.com/KVP04am.png"> -->
       <h1>bestseller.<span class="blinking-cursor">|</span></h1>
     </header>
-      <!-- <img class="book" src="https://i.imgur.com/XTGvpRH.png" alt="book"> -->
-      <!-- <nav>
-        <ul>
-          <li>Recipe 1</li>
-          <li>Recipe 2</li>
-          <li>Recipe 3</li>
-        </ul>
-      </nav> -->
-      <main id="book-collection">
-        <!-- <div id="tile">
-          <img class="book-img" src="https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png" alt="title" style="max-width: 500px;" />
-          <h2 id="title">Title</h2>
-          <em><h3 id="author">Author Name</h3></em>
-        </div> -->
+      <nav>
+        <h3><span id="bookshelf">b o o k s h e l f :</span></h3>
+        <div id="book-collection"></div>
+      </nav>
+      <main>
+        <div id="featured-book">
+          <h3><span id="featuring">f e a t u r i n g:</span></h3>
+          <img class="book-cover" src="https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png" alt="title" style="max-width: 500px;" />
+          <p><strong>Title</strong></p>
+          <em>Author Name</em>
+          <p>Genre</p>
+          <p>Book description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur, beatae repellendus omnis a harum dolorum officia. Eaque aspernatur, neque debitis laudantium harum odit nam necessitatibus esse repellat natus reiciendis ipsum.</p>
+          <p>Reviews:</p>
+          <p>Add a Review: </p>
+            <form id="new-review" data-id="insert review ID">
+              <input type="text" name="rating" id="rating" value="Insert Star Rating Here" />
+              <br>
+              <textarea name="comment" id="comment">Insert Comment Here</textarea>
+              <br>
+              <input type="submit" value="Submit" />
+            </form>
+        </div>
       </main>
 
 </body>
