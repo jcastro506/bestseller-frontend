@@ -14,8 +14,10 @@ body {
   }
   
   header {
-    grid-area: header;
-    margin: 0px 60px;
+    /* grid-area: header; */
+    display: flex;
+    flex-flow: row wrap;
+    margin: -10px 60px;
     color: rgb(0, 0, 0);
     font-size: 2em; 
   }
@@ -42,10 +44,6 @@ body {
     background-color: rgba(255, 255, 255, 0.3);
   } */
 
-  /* .book-img {
-    width: 230px;
-    height: 250px;
-  } */
 
   .tile{
     margin: 10px 60px;
@@ -60,7 +58,17 @@ body {
     background-color: rgb(235, 235, 235);
   } */
 
-  
+  /* BOOKS LOGO */
+/* 
+  #books {
+    max-width: 100px;
+    max-height: 80px;
+    margin: 40px 0px;
+  }
+
+  h1 {
+    margin: 65px 10px;
+  } */
 
   /*  BLINKING CURSOR */
   .blinking-cursor {

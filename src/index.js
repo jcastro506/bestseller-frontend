@@ -1,9 +1,5 @@
 /* DOM ELEMENTS */
 const mainContainer = document.querySelector("#book-collection")
-// const bookImg = document.querySelector(".book-img")
-// const bookTitle = document.querySelector("#title")
-// const bookAuthor = document.querySelector("#author")
-
 
 /* Render Functions */
 function renderBooks (bookObj) {
