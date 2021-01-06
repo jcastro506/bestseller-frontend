@@ -44,6 +44,7 @@ function renderABook(bookObj){
         bookObj.reviews.forEach(function(review){
             // console.log(review.content)
             const li = document.createElement('li')
+            li.className = "review-li"
             const likesBtn = document.createElement('button')
             likesBtn.className = "like-btn"
             likesBtn.textContent = `${review.likes} ♥️`
@@ -66,9 +67,83 @@ function renderABook(bookObj){
                  .then(r => r.json())
                  .then(data => console.log(data))
             })
+
+            const deleteBtn = document.createElement("button")
+            deleteBtn.className = "delete-btn"
+            deleteBtn.textContent = `Delete Review`
+            li.append(deleteBtn)
+
+            deleteBtn.addEventListener("click", function(event){
+                console.log("clicked")
+                if (event.target.matches(".delete-btn")){
+                    const reviewLi = event.target.closest(".review-li")
+                    reviewLi.remove()
+                }
+                deleteAReview(review.id)
+            })
+
+            const editButton = document.createElement('button')
+            editButton.className = "edit-btn"
+            editButton.textContent = 'Edit Review'
+            
+            editButton.addEventListener("click", function(){
+                document.querySelector(".form-popup").style.display = "block"
+            })
+
+            const editDiv = document.createElement("div")
+            editDiv.className= "form-popup"
+            editDiv.innerHTML = `
+                <form class="form-container" data-id="insert ID">
+                    <h1>Edit Review</h1>
+                
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" id="edit-username" placeholder="Username" name="username">
+                
+                    <label for="review"><b>Review</b></label>
+                    <input type="textarea" id="edit-review" placeholder="Change Your Review" name="review">
+                
+                    <button type="submit" class="btn">Submit</button>
+                    <button type="submit" class="cancel-btn">Close</button>
+                </form>`
+
+            li.append(editButton, editDiv)
+
+            editButton.addEventListener("click", function(event){
+                editUsername.value = review.username
+                editReview.value = review.content
+                form.dataset.id = review.id
+            })
+
+            const editForm = document.querySelector(".form-container")
+            const editUsername = document.querySelector("#edit-username")
+            const editReview = document.querySelector("#edit-review")
+            
+            editForm.addEventListener("submit", function(event){
+                event.preventDefault()
+                console.log(event.target)
+                fetch(`http://localhost:3000/reviews/${review.id}`,{
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: review.id,
+                        username: editUsername.value,
+                        content: editReview.value,
+                    })
+                })
+                 .then(r => r.json())
+                 .then(data => console.log(data))
+            })
+            
+            const cancelBtn = document.querySelector(".cancel-btn")
+            cancelBtn.addEventListener("click", function(event){
+                event.preventDefault()
+                document.querySelector(".form-popup").style.display = "none";
+            })
+
         })
         
-
         const formDiv = document.querySelector(".review-form")
         formDiv.innerHTML = `
             <p>Add a Review: </p>
@@ -122,6 +197,7 @@ function renderNewReview(reviewObj){
     list.append(newLi)
 }
 
+
 /* Event Listeners */
 
 
@@ -137,6 +213,12 @@ fetch(`http://localhost:3000/books/`)
     fetch(`http://localhost:3000/books/11`)
     .then(r => r.json())
     .then(bookObj => renderABook(bookObj))
+ }
+
+ function deleteAReview(id){
+     fetch(`http://localhost:3000/reviews/${id}`, {
+         method: 'DELETE'
+     })
  }
  
 
