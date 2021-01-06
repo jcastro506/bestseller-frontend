@@ -19,14 +19,24 @@
       </nav>
       <main>
         <div id="featured-book">
-          <h3><span id="featuring">f e a t u r i n g:</span></h3>
-          <img class="book-cover" src="https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png" alt="title" style="max-width: 500px;" />
-          <p><strong>Title</strong></p>
-          <em>Author Name</em>
-          <p>Genre</p>
-          <p>Book description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur, beatae repellendus omnis a harum dolorum officia. Eaque aspernatur, neque debitis laudantium harum odit nam necessitatibus esse repellat natus reiciendis ipsum.</p>
-          <p>Reviews:</p>
-          <div class="form-title">
+          <h3><span id="featuring">f e a t u r i n g :</span></h3>
+          <div class="book-cover"></div>
+          
+          <div id="book-details">
+            <p><strong>Title</strong></p>
+            <em>Author Name</em>
+            <p>Genre</p>
+            <p>Book description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur, beatae repellendus omnis a harum dolorum officia. Eaque aspernatur, neque debitis laudantium harum odit nam necessitatibus esse repellat natus reiciendis ipsum.</p>
+          </div>
+
+          <div id="review-details">
+            <p>Reviews:</p>
+            <ul id="review-list">
+
+            </ul>
+          </div>
+
+          <div class="review-form">
             <p>Add a Review: </p>
             <form id="new-review" data-id="insert review ID">
               <input type="text" name="rating" id="rating" value="Insert Star Rating Here" />
@@ -34,6 +44,7 @@
               <input class="submit-btn" type="submit" value="Submit" />
             </form>
           </div>
+        
         </div>
       </main>
 
