@@ -23,6 +23,7 @@
           <div class="book-cover"></div>
           
           <div id="book-details">
+            <img src="" alt="book title">
             <p><strong>Title</strong></p>
             <em>Author Name</em>
             <p>Genre</p>
@@ -31,9 +32,21 @@
 
           <div id="review-details">
             <p>Reviews:</p>
-            <ul id="review-list">
-
-            </ul>
+            <ul id="review-list"></ul>
+            <div class="form-popup">
+              <form class="form-container" data-id="insert ID">
+                <h1>Edit Review</h1>
+            
+                <label for="username"><b>Username</b></label>
+                <input type="text" id="edit-username" placeholder="Username" name="username">
+            
+                <label for="review"><b>Review</b></label>
+                <input type="textarea" id="edit-review" placeholder="Change Your Review" name="review">
+            
+                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="cancel-btn">Close</button>
+            </form>
+            </div>
           </div>
 
           <div class="review-form">
