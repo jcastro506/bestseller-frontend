@@ -36,7 +36,7 @@ function renderABook(bookObj){
     divBookDetails.innerHTML = `
         <p><strong>${bookObj.title}</strong></p>
         <em>${bookObj.author}</em>
-        <p>${bookObj.genre}</p>
+        <p>Genre: ${bookObj.genre}</p>
         <p>${bookObj.description}</p>
     `
     bookCover.append(featuredImage)
@@ -48,18 +48,22 @@ function renderABook(bookObj){
 }
 
 function renderEachReview(review){
-    const li = document.createElement('li')
+    const li = document.createElement("li")
     li.className = "review-li"
     li.dataset.id = review.id 
     li.textContent = `${review.content} - ${review.username}`
     reviewList.append(li)
 
+    const buttonsDiv = document.createElement("div")
+    buttonsDiv.className = "button-div"
+    li.append(buttonsDiv)
+
     //increase likes
-    const likesBtn = document.createElement('button')
+    const likesBtn = document.createElement("button")
     likesBtn.className = "like-btn"
     likesBtn.dataset.id = review.id
     likesBtn.textContent = `${review.likes} ♥️`
-    li.append(likesBtn)
+    buttonsDiv.append(likesBtn)
 
     // refactor event listener with a callback function
     // likesBtn = event.target
@@ -70,28 +74,12 @@ function renderEachReview(review){
         updateLikes(review.id, totalLikes)
     })
 
-    // delete review
-    const deleteBtn = document.createElement("button")
-    deleteBtn.className = "delete-btn"
-    deleteBtn.dataset.id = review.id
-    deleteBtn.textContent = `Delete Review`
-    li.append(deleteBtn)
-
-    deleteBtn.addEventListener("click", function(event){
-        console.log("clicked")
-        if (event.target.matches(".delete-btn")){
-            const reviewLi = event.target.closest(".review-li")
-            reviewLi.remove()
-        }
-        deleteAReview(review.id)
-    })
-
     // edit review
     const editButton = document.createElement('button')
     editButton.className = "edit-btn"
     editButton.dataset.id = review.id 
-    editButton.textContent = 'Edit Review'
-    li.append(editButton)
+    editButton.textContent = 'edit'
+    buttonsDiv.append(editButton)
 
     editButton.addEventListener("click", function(event){
         document.querySelector(".form-popup").style.display = "block"
@@ -122,16 +110,32 @@ function renderEachReview(review){
             // renderEditedReview(reviewId, editReviewObj)
         })
         
+    }) 
+
+    // delete review
+    const deleteBtn = document.createElement("button")
+    deleteBtn.className = "delete-btn"
+    deleteBtn.dataset.id = review.id
+    deleteBtn.textContent = `delete`
+    buttonsDiv.append(deleteBtn)
+
+    deleteBtn.addEventListener("click", function(event){
+        console.log("clicked")
+        if (event.target.matches(".delete-btn")){
+            const reviewLi = event.target.closest(".review-li")
+            reviewLi.remove()
+        }
+        deleteAReview(review.id)
     })
     
     // Add a new review
     const formDiv = document.querySelector(".review-form")
     formDiv.innerHTML = `
-        <p>Add a Review: </p>
+        <p><strong>Add a Review:</strong> </p>
         <form id="new-review" data-id="insert review ID">
-        <input type="text" name="name" id="name" placeholder="Username"/>
-        <textarea name="comment" id="comment">Insert Review Here</textarea>
-        <input class="submit-btn" type="submit" value="Submit"/>
+        <input type="text" name="name" id="name" placeholder="username"/>
+        <textarea name="comment" placeholder="leave review here" id="comment"></textarea>
+        <input class="submit-btn" type="submit" value="submit"/>
         </form>
     `
     reviewDetails.append(reviewList,formDiv)
@@ -189,7 +193,7 @@ fetch(`http://localhost:3000/books/`)
 
 
 function getABook(){
-    fetch(`http://localhost:3000/books/11`)
+    fetch(`http://localhost:3000/books/169`)
      .then(r => r.json())
      .then(bookObj => renderABook(bookObj))
 }

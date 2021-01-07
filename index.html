@@ -10,10 +10,10 @@
 </head>
 <body>
     <header>
-      <!-- <img id="books" src="https://i.imgur.com/KVP04am.png"> -->
       <h1>bestseller.<span class="blinking-cursor">|</span></h1>
+      <!-- <img id="book-logo" src="https://i.imgur.com/KVP04am.png"> -->
     </header>
-      <nav>
+      <nav class= "nav-bar">
         <h3><span id="bookshelf">b o o k s h e l f :</span></h3>
         <div id="book-collection"></div>
       </nav>
@@ -31,7 +31,7 @@
           </div>
 
           <div id="review-details">
-            <p>Reviews:</p>
+            <p><strong>Reviews:</strong></p>
             <ul id="review-list"></ul>
             <div class="form-popup">
               <form class="form-container" data-id="insert ID">
@@ -43,8 +43,8 @@
                 <label for="review"><b>Review</b></label>
                 <input type="textarea" id="edit-review" placeholder="Change Your Review" name="review">
             
-                <button type="submit" class="btn">Submit</button>
-                <button type="submit" class="cancel-btn">Close</button>
+                <button type="submit" class="btn">submit</button>
+                <button type="submit" class="cancel-btn">cancel</button>
             </form>
             </div>
           </div>
@@ -52,7 +52,7 @@
           <div class="review-form">
             <p>Add a Review: </p>
             <form id="new-review" data-id="insert review ID">
-              <input type="text" name="rating" id="rating" value="Insert Star Rating Here" />
+              <input type="text" name="rating" id="rating" value="Username" />
               <textarea name="comment" id="comment">Insert Comment Here</textarea>
               <input class="submit-btn" type="submit" value="Submit" />
             </form>
