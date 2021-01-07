@@ -16,6 +16,20 @@
       <nav class= "nav-bar">
         <h3><span id="bookshelf">b o o k s h e l f :</span></h3>
         <div id="book-collection"></div>
+        <div id="add-book"><button class="add-book-btn">add a book</button></div>
+
+        <div id="add-book-form" class="add-book-popup">
+          <form id="new-book" data-id="insert review ID">
+            <input type="text" name="title" id="title" placeholder="Title"/>
+            <input type="text" name="author" id="author" placeholder="Author"/>
+            <input type="text" name="genre" id="genre" placeholder="Genre"/>
+            <input type="text" name="image_url" id="image" placeholder="Insert Cover Photo URL"/>
+            <textarea name="description" id="comment" placeholder="Write a description"></textarea>
+            <input class="submit-book-btn" type="submit" value="add a book"/>
+            <button type="submit" class="cancel-book-btn">cancel</button>
+          </form>
+      </div>
+      </div>
       </nav>
       <main>
         <div id="featured-book">
@@ -41,7 +55,7 @@
                 <input type="text" id="edit-username" placeholder="Username" name="username">
             
                 <label for="review"><b>Review</b></label>
-                <input type="textarea" id="edit-review" placeholder="Change Your Review" name="review">
+                <textarea id="edit-review" placeholder="Change Your Review" name="review"  cols="100" rows="5"></textarea>
             
                 <button type="submit" class="btn">submit</button>
                 <button type="submit" class="cancel-btn">cancel</button>

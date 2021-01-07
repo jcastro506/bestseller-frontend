@@ -10,19 +10,41 @@ const editForm = document.querySelector(".form-container")
 const editUsername = document.querySelector("#edit-username")
 const editReview = document.querySelector("#edit-review")
 const cancelBtn = document.querySelector(".cancel-btn")
+const addBookForm = document.querySelector('#new-book')
+const addBookBtn = document.querySelector(".add-book-btn")
 
-/* RENDER FUNCTION */
+
+/* RENDER FUNCTIONS */
 function renderBooks (bookObj) {
     // console.log(bookObj)
     const divTile = document.createElement("div")
     divTile.className = "tile"
     divTile.dataset.id = bookObj.id
-    divTile.innerHTML += `
-        <img class="book-img" src="${bookObj.image_url}" alt="${bookObj.title}"/>`
-    divContainer.append(divTile)
 
-    divTile.addEventListener("click", function(){
+    const bookImage = document.createElement("img")
+    bookImage.src = bookObj.image_url
+    bookImage.alt = bookObj.title
+    bookImage.className = "book-img"
+    bookImage.dataset.id = bookObj.id 
+
+    const deleteBook = document.createElement("button")
+    deleteBook.className = "book-delete-button"
+    deleteBook.textContent = "X"
+    deleteBook.dataset.id = bookObj.id 
+
+    divContainer.append(divTile)
+    divTile.append(deleteBook, bookImage)
+
+    bookImage.addEventListener("click", function(){
         renderABook(bookObj)
+    })
+
+    deleteBook.addEventListener("click", function(event){
+            // console.log(event.target) 
+            divTile.remove()
+            deleteABook(bookObj.id)
+            getABook()
+        
     })
 }
 
@@ -51,7 +73,8 @@ function renderEachReview(review){
     const li = document.createElement("li")
     li.className = "review-li"
     li.dataset.id = review.id 
-    li.textContent = `${review.content} - ${review.username}`
+    li.innerHTML = `
+        ${review.content} <span id="review-by">-<em>${review.username}</em></span>`
     reviewList.append(li)
 
     const buttonsDiv = document.createElement("div")
@@ -86,8 +109,6 @@ function renderEachReview(review){
         editUsername.value = review.username
         editReview.value = review.content
         editReview.dataset.id = review.id
-        
-        // renderEditedReview(reviewId)
 
         editForm.addEventListener("submit", function(event){
             event.preventDefault()
@@ -106,8 +127,6 @@ function renderEachReview(review){
             })
              .then(r => r.json())
              .then(reviewObj => renderEachReview(reviewObj))
-             
-            // renderEditedReview(reviewId, editReviewObj)
         })
         
     }) 
@@ -134,7 +153,7 @@ function renderEachReview(review){
         <p><strong>Add a Review:</strong> </p>
         <form id="new-review" data-id="insert review ID">
         <input type="text" name="name" id="name" placeholder="username"/>
-        <textarea name="comment" placeholder="leave review here" id="comment"></textarea>
+        <textarea name="comment" placeholder="speak your mind..." id="comment" cols="100" rows="5"></textarea>
         <input class="submit-btn" type="submit" value="submit"/>
         </form>
     `
@@ -180,22 +199,60 @@ newReviewForm.addEventListener("submit", function(event){
     })
 
 
+
 cancelBtn.addEventListener("click", function(event){
     event.preventDefault()
     document.querySelector(".form-popup").style.display = "none"
 })
 
 
+addBookBtn.addEventListener("click", function(event){
+    document.querySelector(".add-book-popup").style.display = "block"
+
+    addBookForm.addEventListener('submit', function(event){
+        event.preventDefault()
+        const newTitle = event.target.title.value
+        const newAuthor = event.target.author.value 
+        const newGenre = event.target.genre.value 
+        const newDescription = event.target.description.value 
+        const newImage = event.target.image_url.value 
+        createdBookObj = {
+             title: newTitle,
+             author: newAuthor,
+             genre: newGenre, 
+             description: newDescription,
+             image_url: newImage
+         }
+    
+         createABook(createdBookObj)
+    })
+}) 
+
+const cancelBookBtn = document.querySelector(".cancel-book-btn")
+
+cancelBookBtn.addEventListener("click", function(event){
+    event.preventDefault()
+    document.querySelector(".add-book-popup").style.display = "none"
+})
+
+
 /* FETCH */
-fetch(`http://localhost:3000/books/`)
+function getBookshelf(){
+    fetch(`http://localhost:3000/books/`)
  .then(r => r.json())
  .then(bookArray => bookArray.forEach(renderBooks))
-
+}
 
 function getABook(){
-    fetch(`http://localhost:3000/books/169`)
+    fetch(`http://localhost:3000/books/190`)
      .then(r => r.json())
      .then(bookObj => renderABook(bookObj))
+}
+
+function deleteABook(id){
+    fetch(`http://localhost:3000/books/${id}`, {
+        method: 'DELETE'
+    })
 }
 
 function updateLikes(id, totalLikes){
@@ -216,18 +273,19 @@ function deleteAReview(id){
     })
 }
 
-// function renderEditedReview(reviewId, editReviewObj){
-//     fetch(`http://localhost:3000/reviews/${reviewId}`,{
-//         method: 'PATCH',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(editReviewObj)
-//     })
-//      .then(r => r.json())
-//      .then(data => console.log(data))
-// }
- 
+function createABook(newBookObj){
+    fetch('http://localhost:3000/books', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newBookObj),
+        })
+        .then(response => response.json())
+        .then(bookObj => renderBooks(bookObj))
+}
+
 
 /* Initialize */
+getBookshelf()
 getABook()
